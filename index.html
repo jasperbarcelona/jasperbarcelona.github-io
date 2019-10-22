@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no">
+
+        <meta property="og:title" content="K&K Global Solutions, Inc.">
+        <meta property="og:description" content="Learn more about the services we offer.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="http://knkglobalsolutions.com/">
+        <meta property="og:image" content="http://knkglobalsolutions.com/static/images/assets/banner3.jpg">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="600">
+        <meta property="og:image:height" content="600">
+
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/bootstrap.css.map">
+        <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="static/css/bootstrap-theme.css.map">
+        <link rel="stylesheet" href="static/css/style.css">
+        <link rel="stylesheet" href="static/css/animate.css">
+        <link rel="stylesheet" href="static/css/icon.css">
+        <link rel="shortcut icon" href="static/images/assets/favicon.ico" type="image/x-icon">
+        <title>K&K Global Solutions, Inc.</title>
+	</head>
+	<body>
+		<div id="masterLoader" class="flex-column">
+		</div>
+        <div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="gridSystemModalLabel">Inquiry</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please provide the info below. Our representative will get in touch with you shortly.</p>
+                        <div class="input-container whole">
+                            <label for="inquiryName">Full Name</label>
+                            <input type="text" id="inquiryName" class="form-control auto-focus required">
+                        </div>
+                        <div class="input-container whole">
+                            <label for="inquiryEmail">Email</label>
+                            <input type="text" id="inquiryEmail" class="form-control required">
+                        </div>
+                        <div class="input-container whole">
+                            <label for="inquiryMsisdn">Contact No.</label>
+                            <input type="number" id="inquiryMsisdn" maxlength="11" class="form-control required">
+                        </div>
+                        <div class="input-container whole">
+                            <label for="inquiryMessage">Message</label>
+                            <textarea id="inquiryMessage" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeInquiryBtn" class="btn btn modal-btn" data-dismiss="modal">Close</button>
+                        <button type="button" id="sendInquiryBtn" class="btn btn-primary modal-btn" onclick="save_inquiry()" data-loading-text="Sending.." data-complete-text="Send">Send</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        
+        <div class="modal fade" id="thankYouModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="gridSystemModalLabel">Thank you!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="thankyouMessage">Thank you for your interest in our services! Our representative will get in touch with you shortly.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeThankYouBtn" class="btn btn modal-btn" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        
+        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="gridSystemModalLabel">Oops!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="thankyouMessage">Something went wrong, please try again.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeThankYouBtn" class="btn btn modal-btn" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- <div id="header" class="transparent">
+	<div class="header-left">
+	</div>
+	<div class="header-right flex-column">
+		<div class="header-nav-container subflex-right">
+			<span id="homeNav" class="nav-opt active" onclick="go_home()">Home</span>
+			<span id="aboutNav" class="nav-opt" onclick="go_about()">About</span>
+			<span id="servicesNav" class="nav-opt" onclick="go_services()">Services</span>
+			<span id="clientsNav" class="nav-opt" onclick="go_clients()">Clients</span>
+			<span id="contactNav" class="nav-opt" onclick="go_contact()">Contact</span>
+		</div>
+	</div>
+</div> -->
+<div class="banner">
+	<div class="banner-overlay flex-column">
+		<div class="banner-content">
+			<img src="static/images/assets/banner.png" id="bannerLogo">
+			<div class="banner-nav flex-row-center">
+				<span class="banner-nav-opt">About</span>
+				<span class="banner-nav-opt">Services</span>
+				<span class="banner-nav-opt">Get Started</span>
+				<span class="banner-nav-opt">Contact</span>
+			</div>
+			<div class="mobile-arrow flex-column">
+				<div class="banner-arrow flex-column" id="mobileArrow">
+					<i class="material-icons flex-column">arrow_downwards</i>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="main-content">
+	<div class="content-nav flex-row-center">
+		<span class="content-nav-opt active" id="aboutNav" onclick="show_about()">About</span>
+		<span class="content-nav-opt" id="servicesNav" onclick="show_services()">Services</span>
+		<div class="flex-column" id="contentLogoContainer">
+			<img src="static/images/assets/header_logo2.png" id="contentLogo">
+		</div>
+		<span class="content-nav-opt" id="getStartedNav" onclick="show_get_started()">Get Started</span>
+		<span class="content-nav-opt" id="contactNav" onclick="show_contact()">Contact</span>
+	</div>
+	<div class="page about-page">
+		<div class="about-pic-container below" data-os-animation="fadeIn" data-os-animation-delay=".2s"></div>
+		<div class="content-container flex-column">
+			<div class="text-container subflex-left">
+				<span class="page-title white-text below" data-os-animation="fadeInUp" data-os-animation-delay="1s">About Us</span>
+				<p class="about-text white-text below" data-os-animation="fadeInUp" data-os-animation-delay="1s">
+					At K&K Global Solutions, Inc., we aim to provide excellent customer service and provide client's satisfaction. With first rate & astounding professionals that strive to be the best in the business.<br><br>
+					Our mission is to help business owners by providing sublime customer service care, hitting sales quota & exceeding client's expectations.
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="page services-page">
+		<div class="content-container flex-column">
+			<div class="text-container subflex-left">
+				<span class="page-title below" data-os-animation="fadeInUp" data-os-animation-delay="0s">Our Services</span>
+				<div class="services-container">
+					<div class="service col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInUp" data-os-animation-delay="0s">
+						<div class="service-icon-container flex-column">
+							<i class="material-icons" id="virtualAssistantIcon">person</i>
+						</div>
+						<span>Virtual<br>Assistant</span>
+					</div>
+					<div class="service col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInUp" data-os-animation-delay="0.2s">
+						<div class="service-icon-container flex-column">
+							<i class="material-icons" id="webDevelopmentIcon">code</i>
+						</div>
+						<span>Website<br>Development</span>
+					</div>
+					<div class="service col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInUp" data-os-animation-delay="0.4s">
+						<div class="service-icon-container flex-column">
+							<i class="material-icons" id="graphicDesignIcon">color_lens</i>
+						</div>
+						<span>Graphic<br>Design</span>
+					</div>
+					<div class="service col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInUp" data-os-animation-delay="0.6s">
+						<div class="service-icon-container flex-column">
+							<i class="material-icons" id="softwareDevelopmentIcon">devices</i>
+						</div>
+						<span>Software<br>Development</span>
+					</div>
+					<div class="service col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInUp" data-os-animation-delay="0.8s">
+						<div class="service-icon-container flex-column">
+							<i class="material-icons" id="recruitmentAssistantIcon">supervisor_account</i>
+						</div>
+						<span>Recruitment<br>Assistant</span>
+					</div>
+					<div class="service col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInUp" data-os-animation-delay="1s">
+						<div class="service-icon-container flex-column">
+							<i class="material-icons" id="leadGenerationIcon">import_contacts</i>
+						</div>
+						<span>Lead<br>Generation</span>
+					</div>
+					<div class="service col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInUp" data-os-animation-delay="1.2s">
+						<div class="service-icon-container flex-column">
+							<i class="material-icons" id="customerServiceIcon">headset_mic</i>
+						</div>
+						<span>Customer<br>Service</span>
+					</div>
+					<div class="service col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInUp" data-os-animation-delay="1.4s">
+						<div class="service-icon-container flex-column">
+							<i class="material-icons" id="salesIcon">trending_up</i>
+						</div>
+						<span>Sales and<br>Telemarketing</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="page get-started-page">
+		<div class="content-container flex-column">
+			<div class="text-container subflex-left">
+				<span class="page-title white-text below" data-os-animation="fadeInUp" data-os-animation-delay="0s">Expand your Reach</span>
+			</div>
+			<div class="steps-container">
+				<div class="get-started-step col-md-3 col-sm-4 col-xs-6 flex-column below"  data-os-animation="fadeInRight" data-os-animation-delay="0s">
+					<div class="step-number flex-column">
+						<span>1</span>
+					</div>
+					<img src="static/images/assets/need.png" class="step-img" id="step2">
+					<span class="step-text white-text">You tell us</span>
+					<strong class="step-text white-text">what you need</strong>
+				</div>
+				<div class="get-started-step col-md-3 col-sm-4 col-xs-6 flex-column below"  data-os-animation="fadeInRight" data-os-animation-delay="0.2s">
+					<div class="step-number flex-column">
+						<span>2</span>
+					</div>
+					<img src="static/images/assets/talent.png" class="step-img" id="step2">
+					<span class="step-text white-text">We find the</span>
+					<strong class="step-text white-text">right talent</strong>
+				</div>
+				<div class="get-started-step col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInRight" data-os-animation-delay="0.4s">
+					<div class="step-number flex-column">
+						<span>3</span>
+					</div>
+					<img src="static/images/assets/report.png" class="step-img" id="step3">
+					<span class="step-text white-text">They report</span>
+					<strong class="step-text white-text">to you daily</strong>
+				</div>
+				<div class="get-started-step col-md-3 col-sm-4 col-xs-6 flex-column below" data-os-animation="fadeInRight" data-os-animation-delay="0.6s">
+					<div class="step-number flex-column">
+						<span>4</span>
+					</div>
+					<img src="static/images/assets/together.png" class="step-img" id="step4">
+					<span class="step-text white-text">We grow our</span>
+					<strong class="step-text white-text">business together</strong>
+				</div>
+			</div>
+			<button type="button" class="btn btn-white btn-lg below" id="getStartedBtn" data-os-animation="fadeInUp" data-os-animation-delay="0s" data-toggle="modal" data-target="#inquiryModal">Get Started</button>
+		</div>
+	</div>
+	<div class="page contact-page">
+		<div class="flex-column contact-left">
+			<div class="subflex-left">
+				<span class="white-text contact-label">For inquiries:</span>
+			</div>
+			<div class="flex-row-left email-container">
+				<i class="material-icons white-text">email</i>
+				<span class="white-text contact-text">sales@knkglobalsolutions.com</span>
+			</div>
+			<div class="subflex-left">
+				<span class="white-text contact-label">For technical support:</span>
+			</div>
+			<div class="flex-row-left email-container">
+				<i class="material-icons white-text">email</i>
+				<span class="white-text contact-text">support@knkglobalsolutions.com</span>
+			</div>
+			<div class="subflex-left">
+				<span class="white-text contact-label">You can also call:</span>
+			</div>
+			<div class="flex-row-left email-container">
+				<i class="material-icons white-text">phone</i>
+				<span class="white-text contact-text">+63 (042) 373 1234</span>
+			</div>
+			<div class="flex-row-left email-container">
+				<i class="material-icons white-text">smartphone</i>
+				<span class="white-text contact-text">+63 917 373 1234</span>
+			</div>
+		</div>
+		<div class="flex-column contact-right">
+			<div class="subflex-left">
+				<label for="contactName" class="white-text">Full Name</label>
+			</div>
+			<input type="text" class="form-control required" id="contactName">
+			<div class="subflex-left">
+				<label for="contactEmail" class="white-text">Email</label>
+			</div>
+			<input type="email" class="form-control required" id="contactEmail">
+			<div class="subflex-left">
+				<label for="contactMsisdn" class="white-text">Contact No.</label>
+			</div>
+			<input type="number" class="form-control required" id="contactMsisdn">
+			<div class="subflex-left">
+				<label for="contactMessage" class="white-text">Message</label>
+			</div>
+			<textarea class="form-control" id="contactMessage"></textarea>
+			<button class="btn btn-white" id="sendMessageBtn" onclick="save_message()" data-loading-text="Sending.." data-complete-text="Send">Send</button>
+		</div>
+	</div>
+	<div class="footer flex-column">
+		<span class="white-text">
+			Copyright &#9400; 2019 <strong>K&K Global Solutions, Inc.</strong>
+		</span>
+		<span class="white-text">
+			All rights reserved.
+		</span>
+	</div>
+</div>
+		<script src="static/js/jquery-1.11.0.min.js"></script>
+		<script src="static/js/jquery.waypoints.min.js"></script>
+	    <script src="static/js/jquery.easing.min.js"></script>
+	    <script src="static/js/materialize.js"></script>
+	    <script src="static/js/animations.js"></script>
+	    <script src="static/js/jquery-ui.js"></script>
+	    <script src="static/js/functions.js"></script>
+	    <script src="static/js/jquery.scrollTo.min.js"></script>
+	    <script src="static/js/bootstrap.min.js"></script>
+	    <script src="static/js/easing.js"></script>
+	    <script src="static/js/floatlabels.min.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135513998-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-135513998-1');
+        </script>
+    </body>
+</html>
